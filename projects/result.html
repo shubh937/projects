@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Results</title>
+<style>
+body {
+  margin:0;
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  min-height:100vh;
+  background: linear-gradient(135deg, #4facfe, #00f2fe);
+  color:#fff;
+    background: url('g.jpg') no-repeat center center/cover;
+}
+
+h1 { margin-bottom:20px; text-shadow:2px 2px 4px rgba(0,0,0,0.5); }
+ul { list-style:none; padding:0; max-width:400px; width:100%; }
+li { background: rgba(255,255,255,0.2); margin:5px 0; padding:10px; border-radius:10px; box-shadow:0 4px 10px rgba(0,0,0,0.2); }
+button { margin:5px; padding:10px 20px; border:none; border-radius:10px; background: rgba(255,255,255,0.2); color:#fff; cursor:pointer; font-weight:bold; transition:0.3s; }
+button:hover { background: rgba(255,255,255,0.4); transform:scale(1.05); }
+</style>
+</head>
+<body>
+
+
+
+<h1>Game Results</h1>
+<ul id="resultsList"></ul>
+<button onclick="location.href='index.html'">Home</button>
+<button onclick="clearResults()">Clear Results</button>
+
+<script>
+const resultsList = document.getElementById('resultsList');
+let results = JSON.parse(localStorage.getItem('results')) || [];
+
+function renderResults() {
+  resultsList.innerHTML = '';
+  results.forEach((res,index)=>{
+    const li = document.createElement('li');
+    li.textContent = `${index+1}. ${res}`;
+    resultsList.appendChild(li);
+  });
+}
+
+function clearResults(){
+  localStorage.removeItem('results');
+  localStorage.removeItem('score');
+  results = [];
+  renderResults();
+}
+
+renderResults();
+</script>
+
+</body>
+</html>
